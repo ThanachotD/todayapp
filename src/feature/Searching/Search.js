@@ -27,6 +27,7 @@ const Search = ({route,navigation}) => {
     const UserRef = firestore().collection("Users");
     const { UserData } = route.params;
     const toast = useToast();
+    const [isPress,setisPress] =useState(false);
     const FreindsList = []
     const FetchData =()=>{
         let user = []
@@ -44,7 +45,7 @@ const Search = ({route,navigation}) => {
     }
 
     const AddFriends = async (userid)=> {
-
+        setisPress(true)
         const user = await firestore().collection('Users').doc(userid).get();
         firestore()
             .collection('Users')
@@ -69,6 +70,7 @@ const Search = ({route,navigation}) => {
                             if (user._data.UserToken !== item) {
                                 firestore().collection('Users').doc(UserData[0].UserToken).update({
                                     Friends: [...FreindsList, user._data.UserToken],
+
                                 })
                                     .then(() => {
                                         console.log('User Update Successfully!');
@@ -153,7 +155,8 @@ const Search = ({route,navigation}) => {
         if(userArr===undefined){
             FetchData()
         }
-        console.log(userArr)
+        console.log("user arr",userArr)
+        console.log("user data",UserData)
     },[FetchData])
     return (
         <ScrollView  showsVerticalScrollIndicator={false}
@@ -187,7 +190,7 @@ const Search = ({route,navigation}) => {
                                               </Text>
                                           </VStack>
                                           <Spacer />
-                                          <IconButton variant={"unstyled"} onPress={()=>{AddFriends(item.UserToken)}}
+                                          <IconButton variant={"unstyled"} onPress={()=>{AddFriends(item.UserToken)}} isDisabled={isPress}
                                                       icon={<AntDesign name="user-plus" size={22} color="#475569" /> } pt={1}/>
                                       </HStack>
                                   </Box>:null} />

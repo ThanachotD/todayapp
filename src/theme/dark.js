@@ -35,18 +35,18 @@ const theme = extendTheme({
         body: 'Roboto',
         mono: 'Roboto',
     },
-     components: {
-         Button: {
-             // Can simply pass default props to change default behaviour of components.
-             baseStyle: {
-                 rounded: "md",
-          },
+    components: {
+        Button: {
+            // Can simply pass default props to change default behaviour of components.
+            baseStyle: {
+                rounded: "md",
+            },
             defaultProps: {
-                colorScheme: "primary",
-           },
-      },
+                colorScheme: "purple",
+            },
+        },
     }
 
-    });
+});
 
 export default theme;

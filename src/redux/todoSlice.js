@@ -1,26 +1,18 @@
 
 import {createSlice} from "@reduxjs/toolkit";
 
-let nextTodoId = 0;
-
 const todoSlice = createSlice({
     name: 'todos',
-    initialState: [],
+    initialState: { mode: 'light'},
     reducers: {
         addTodo(state, action) {
-            state.push({ id: nextTodoId++, text: action.payload, completed: false })
+            state.mode = action.payload
         },
-        toggleTodo(state, action) {
-            const todo = state.map(todo => todo.text === action.payload ? 1 : 0)
-            //console.log(state.map(item => item.id));
-            console.log(todo)
-            if (todo) {
-                todo.completed = !todo.completed
-            }
+        toogleDark(state, action) {
+            state.mode = 'dark'
         },
     }
 })
-
 
 export const {addTodo,toggleTodo} = todoSlice.actions
 

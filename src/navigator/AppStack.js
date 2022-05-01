@@ -64,7 +64,6 @@ const HomeStack  = ({route,navigation}) => {
     );
 }
 
-
 function AppStack() {
     return (
             <Stack.Navigator screenOptions={{ headerShown: false }}

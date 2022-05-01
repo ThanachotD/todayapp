@@ -11,11 +11,12 @@ import {
     HStack,
     Center,
     NativeBaseProvider,
-    useToast
+    useToast,
+    Image
 } from "native-base";
 import auth from '@react-native-firebase/auth';
 import {useEffect, useState} from "react";
-import {Image} from "react-native";
+
 
 const Login = ({navigation}) => {
     const [email,setEmail] = useState('');
@@ -49,9 +50,13 @@ const Login = ({navigation}) => {
 
     }
     return <Center w="100%" bgColor={'white'} >
-        <Box safeArea p="2"  w="90%" maxW="350" h="100%">
-            <Image source={{uri:'https://imgz.io/images/2022/04/28/login.png'}} style={{width: 330, height:260
-            }}/>
+        <Box safeArea p="2"  w="100%" maxW="370" h="100%">
+            <Box alignItems={'center'} mt={5}>
+                <Image alt={"a"}source={{uri:'https://imgz.io/images/2022/05/01/logo.png'}} alt="Main Logo Welendar"
+                       style={{ width:127, height: 25}} mb={3}/>
+                <Image  alt={"b"} source={{uri:'https://imgz.io/images/2022/05/01/2480558.jpg'}} style={{width: 350, height:260
+                }}/>
+            </Box>
             <Heading size="2xl" fontWeight="bold"  color={'#3A3D42'} >
                 Welcome!
             </Heading>
@@ -87,7 +92,7 @@ const Login = ({navigation}) => {
                     Login
                 </Button>
             </VStack>
-            <Box mt={35}>
+            <Box>
                 <HStack mt={3} justifyContent="center">
                     <Text mt={3} fontSize="sm" color="coolGray.600" _dark={{
                         color: "warmGray.200"

@@ -13,13 +13,13 @@ import {
     ScrollView,
     Text,
     useToast,
+    Image
 } from "native-base";
 import Icon from 'react-native-vector-icons/AntDesign';
 import {useEffect, useState} from "react";
 import auth from "@react-native-firebase/auth";
 import firestore from '@react-native-firebase/firestore';
 import uuid from 'react-native-uuid';
-import {Image} from "react-native";
 
 const Register = ({navigation}) => {
     const toast = useToast();
@@ -27,6 +27,23 @@ const Register = ({navigation}) => {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [comfirmpassword,setComfirmPassword] = useState('');
+
+    // program to get a random item from an array
+
+    function getRandomItem(arr) {
+        const randomIndex = Math.floor(Math.random() * arr.length);
+        const item = arr[randomIndex];
+        return item;
+    }
+    const array = ['https://imgz.io/images/2022/05/01/image-29.png',
+        'https://imgz.io/images/2022/05/01/image-36.png',
+        'https://imgz.io/images/2022/05/01/image-30.png',
+        'https://imgz.io/images/2022/05/01/image-31.png',
+        'https://imgz.io/images/2022/05/01/image-32.png',
+        'https://imgz.io/images/2022/05/01/image-33.png',
+        'https://imgz.io/images/2022/05/01/image-34.png',
+        '',
+        '',];
 
     const handleCheckInput = () => {
         if(fullname&&email&&password&&comfirmpassword!==''){
@@ -57,7 +74,7 @@ const Register = ({navigation}) => {
                 Friends: [],
                 Chatrooms: [],
                 UserToken:user_id,
-                AvartarUrl:"https://imgz.io/images/2022/04/26/Group-134.png",
+                AvartarUrl:getRandomItem(array),
                 LastMessage:"Let's Chat is Now!"
             })
             .then(() => {
@@ -94,11 +111,11 @@ const Register = ({navigation}) => {
 
     return (
         <ScrollView  showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} bgColor={'white'}>
-            <Box ml={5} mt={3} alignItems={'flex-start'}>
+            <Box ml={3} mt={3} alignItems={'flex-start'}>
                 <IconButton
                     icon={<Icon name="arrowleft" size={30} color="#2F2E41" />}
                     onPress={()=>navigation.navigate('Login')}/>
-                <Image source={{uri:'https://imgz.io/images/2022/04/28/register.png'}} style={{width: 330, height:230}}/>
+                <Image alt={"regis"} source={{uri:'https://imgz.io/images/2022/05/01/2480558dc35960beaeba1d9.jpg'}} style={{width: 375, height:170}}/>
             </Box>
             <Center w="100%" bgColor={'white'}  mb={1}>
                 <Box safeArea p="2" w="90%" maxW="350">

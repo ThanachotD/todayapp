@@ -21,31 +21,46 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import firestore from "@react-native-firebase/firestore";
 import moment from "moment";
 
+
 const ChatPrivate = ({route,navigation}) => {
     const [text,setText] =useState('');
-    const { token,AvatarUrl,Username,users } = route.params;
+    const { token,AvartarUrl,Username,users ,emails} = route.params;
     const [msg,setMsg] =useState([]);
     const [room,setRoom] = useState([]);
     let r = 0;
     const toast = useToast();
 
+    const [sender,setSender] = useState();
+    const [receiver,setReceiver] = useState();
+
     const sendText=  ()=>{
         const roomRef = firestore().collection("Chatrooms").doc(room[0].RoomToken);
         if(text!==''){
-            roomRef.set({
-                LastMessage:"Let's Chat is Now!",
-                Member:[...room[0].Member,],
-                Message:[...room[0].Message,{
-                    recentText:text,
-                    reciver:token,
-                    sender:users[0].UserToken,
-                    timeStamp:moment().format('LT'),
-                }],
-                RoomToken:room[0].RoomToken,
-            })
+                roomRef.set({
+                    LastMessage:"Let's Chat is Now!",
+                    Member:[...room[0].Member,],
+                    Message:[...room[0].Message,{
+                        recentText:text,
+                        reciver:token,
+                        sender:users[0].UserToken,
+                        timeStamp:moment().format('LT'),
+                    }],
+                    RoomToken:room[0].RoomToken,
+                })
                 .then(() => {
                     console.log("Send Text Successfully");
                 });
+
+            const sendRef = firestore().collection('Users').doc(users[0].UserToken).update({
+                LastMessage: text,
+                timeStamp:moment().format('LT'),
+            })
+
+            const reRef = firestore().collection('Users').doc(token).update({
+                LastMessage: text,
+                timeStamp:moment().format('LT'),
+            })
+
         }else{
             toast.show({
                 title: "Typing Somethings less more 1 aphabet",
@@ -53,7 +68,6 @@ const ChatPrivate = ({route,navigation}) => {
             })
         }
     }
-
     useEffect(()=>{
         firestore()
             .collection("Chatrooms")
@@ -83,16 +97,16 @@ const ChatPrivate = ({route,navigation}) => {
                 }
             });
     },[])
-
     return (
         <Box bgColor={'white'} flex={1} >
             <HStack space={0}  mt={1} >
                 <IconButton variant={"unstyled"} pl={5} pt={3}
                             icon={<AntDesign name="arrowleft" size={25} color="#2F2E41"/>}
-                            onPress={()=>navigation.navigate('Chats')}/>
+                            onPress={()=>navigation.navigate('Home',{emails:emails})}/>
+                {/*onPress={()=>navigation.navigate('Chats')}/>*/}
                 <HStack mt={3}>
                     <Avatar ml={5} mr={2} size="30px" source={{
-                        uri: AvatarUrl
+                        uri: AvartarUrl
                     }} />
                     <VStack ml={2} >
                         <Text fontSize={18} _dark={{

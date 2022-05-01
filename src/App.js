@@ -20,9 +20,9 @@ const App = () => {
     return(
         <NavigationContainer>
             <NativeBaseProvider>
-                {!alignsecond ? <Box style={[styles.container, { justifyContent: align }]} background="#FFFFFF">
-                    <Image source={require(ImageLogo)} alt="Main Logo Welendar"
-                           style={{ width:157, height: 35}}/>
+                {!alignsecond ? <Box style={[styles.container, { justifyContent: align }]} background="#634570">
+                    <Image source={{uri:"https://imgz.io/images/2022/05/01/Group-175.png"}} alt="Main Logo Welendar"
+                           style={{ width:137, height: 28}}/>
                 </Box>: <AppStack/>}
             </NativeBaseProvider>
         </NavigationContainer>

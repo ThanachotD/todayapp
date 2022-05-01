@@ -83,7 +83,7 @@ const Settings = ({route,navigation}) => {
                         <FlatList  data={user} renderItem={({item}) =>
                             <Box borderBottomWidth="0" _dark={{}} borderColor='#3F3D56' pl="0" pr="5"  mt="2">
                                 <HStack space={3} justifyContent="space-between">
-                                    <Avatar size="52px" source={{uri: item.AvatarUrl}} />
+                                    <Avatar size="52px" source={{uri: item.AvartarUrl}} />
                                     <VStack>
                                         <Text _dark={{color: "warmGray.50"}} color="coolGray.800" bold>{item.Username}</Text>
                                         <Text color="coolGray.600" _dark={{color: "warmGray.200"}}>{item.Email}</Text>
